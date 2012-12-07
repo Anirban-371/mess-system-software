@@ -8,6 +8,7 @@
  * @author Anirban
  */
 public class messdetails extends javax.swing.JFrame {
+    
 
     /**
      * Creates new form messdetails
