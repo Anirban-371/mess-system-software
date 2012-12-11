@@ -9,31 +9,40 @@
  */
 import java.util.*;
 import javax.script.*;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 
 public class messentry extends javax.swing.JFrame {
-
+    
+     private int x,y;
+     private String time,currentDate;
+     public String str="0",str1="0",str3; 
     /**
      * Creates new form messentry
      */
-    public int x,y;
-    public void fix(String str2) {
+    public void fix(String str1, String str2) {
+        
+        str3=str1;
         lblname.setText(str2);
         lbldate.setText(dateformat());
-        }
-    
-    public String dateformat(){
-     
+    }
+
+    public String dateformat() {
+
         Calendar javaCalendar;
-        String currentDate ;
         javaCalendar = Calendar.getInstance();
-        currentDate = javaCalendar.get(Calendar.DATE) + "/" + (javaCalendar.get(Calendar.MONTH)+1) + "/" + javaCalendar.get(Calendar.YEAR);
-        return(currentDate);
-        
-         
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:MM");
+        time= sdf.format(javaCalendar.getTime());
+        currentDate = javaCalendar.get(Calendar.DATE) + "/" + (javaCalendar.get(Calendar.MONTH) + 1) + "/" + javaCalendar.get(Calendar.YEAR);
+       // System.out.print(currentDate +"and"+time+"  ");
+        return (currentDate);
+
+
     }
-    public void add(){
-        
+
+    public void add() {
     }
+
     public messentry() {
         initComponents();
     }
@@ -54,9 +63,9 @@ public class messentry extends javax.swing.JFrame {
         lblextra = new javax.swing.JLabel();
         extratextfield = new javax.swing.JTextField();
         lblamount = new javax.swing.JLabel();
-        amounttextfield = new javax.swing.JTextField();
         submitbutton = new javax.swing.JButton();
         lblheading = new javax.swing.JLabel();
+        amounttextfield = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(680, 420));
@@ -86,29 +95,21 @@ public class messentry extends javax.swing.JFrame {
 
         extratextfield.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         extratextfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        extratextfield.setText("0");
         extratextfield.setToolTipText("");
+        extratextfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                extratextfieldActionPerformed(evt);
+            }
+        });
+        extratextfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                extratextfieldKeyPressed(evt);
+            }
+        });
 
         lblamount.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblamount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblamount.setText("AMOUNT");
-
-        amounttextfield.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        amounttextfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        amounttextfield.setToolTipText("");
-        amounttextfield.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                amounttextfieldActionPerformed(evt);
-            }
-        });
-        amounttextfield.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                amounttextfieldKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                amounttextfieldKeyTyped(evt);
-            }
-        });
 
         submitbutton.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         submitbutton.setText("SUBMIT");
@@ -123,41 +124,47 @@ public class messentry extends javax.swing.JFrame {
         lblheading.setText("DAILY BILL");
         lblheading.setToolTipText("");
 
+        amounttextfield.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        amounttextfield.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        amounttextfield.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                amounttextfieldKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblheading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(10, 10, 10)
+                        .addComponent(lblheading, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(lblname, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbldate, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addComponent(lblcost, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(costtextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(491, 491, 491)
+                        .addComponent(submitbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lbldate, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(lblcost, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(lblextra, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(224, 224, 224)
-                                        .addComponent(lblamount, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)))
-                                .addGap(33, 33, 33)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(327, 327, 327)
+                                .addComponent(lblextra, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(377, 377, 377)
+                                .addComponent(lblamount)))
+                        .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(submitbutton, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                            .addComponent(amounttextfield, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                            .addComponent(extratextfield)
-                            .addComponent(costtextfield))
-                        .addGap(0, 17, Short.MAX_VALUE)))
+                            .addComponent(extratextfield, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                            .addComponent(amounttextfield))))
                 .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
@@ -167,22 +174,25 @@ public class messentry extends javax.swing.JFrame {
                 .addComponent(lblheading, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(costtextfield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblname, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lbldate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblcost, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblname, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(costtextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblcost, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbldate, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(extratextfield, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                    .addComponent(lblextra))
-                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(lblextra))
+                    .addComponent(extratextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblamount, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(amounttextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
-                .addComponent(submitbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(132, Short.MAX_VALUE))
+                    .addComponent(amounttextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49)
+                .addComponent(submitbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         costtextfield.getAccessibleContext().setAccessibleName("");
@@ -190,35 +200,59 @@ public class messentry extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void amounttextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amounttextfieldActionPerformed
-            
-    }//GEN-LAST:event_amounttextfieldActionPerformed
-
     private void submitbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitbuttonActionPerformed
-       
-            entry e=new entry();
-            String s=e.str1;
-            connection conn=new connection();
+        x=Integer.parseInt(amounttextfield.getText());
+        String messid="gmess";
+        
+        try{
             
-            String sql="Insert into eat values()";
+            System.out.println(str3);
+            connection con = new connection();
+            String sql = "Insert into eat values('"+messid+"','"+str3+"','"+time+"','"+x+"','"+currentDate+"')";
+            con.stmt=con.conn.createStatement();
+            con.stmt.execute(sql);
+            JOptionPane.showMessageDialog(null,"Thanks");
+            {
+                
+            }
+        }
+        catch(Exception ex){
+           //ex.printStackTrace();
+            System.out.print(ex);
+        }
+        
     }//GEN-LAST:event_submitbuttonActionPerformed
 
     private void amounttextfieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_amounttextfieldKeyPressed
-             while(costtextfield.getText()!=null || extratextfield.getText()!=null){
-             x= Integer.parseInt(costtextfield.getText());
-           /* y= Integer.parseInt(extratextfield.getText());
-             int  z=x+y;*/
-             amounttextfield.setText(x+"");
-             
-        }
+            
     }//GEN-LAST:event_amounttextfieldKeyPressed
 
-    private void amounttextfieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_amounttextfieldKeyTyped
-             x= Integer.parseInt(costtextfield.getText());
-             y= Integer.parseInt(extratextfield.getText());
-             int  z=x+y;
-             amounttextfield.setText(z+ "");
-    }//GEN-LAST:event_amounttextfieldKeyTyped
+    private void extratextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_extratextfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_extratextfieldActionPerformed
+
+    private void extratextfieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_extratextfieldKeyPressed
+        x = Integer.parseInt(costtextfield.getText());
+        int i= evt.getKeyCode();
+       
+        try{
+        if(i!=8){
+        str=str1+(i-48);
+        str1=str;
+        str="0";
+        y=x+(Integer.parseInt(str1));
+        amounttextfield.setText(y+"");
+        }else{
+            extratextfield.setText(null);
+            amounttextfield.setText(x+"");
+            str1="0";
+                       
+        }
+        }catch(Exception e){
+            System.out.print(e);
+        }
+        
+    }//GEN-LAST:event_extratextfieldKeyPressed
 
     /**
      * @param args the command line arguments
@@ -234,16 +268,32 @@ public class messentry extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+                
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(messentry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(messentry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(messentry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(messentry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(messentry.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(messentry.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(messentry.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } 
+
+catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(messentry.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

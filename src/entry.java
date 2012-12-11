@@ -137,8 +137,8 @@ public class entry extends javax.swing.JFrame {
             con.stmt=con.conn.createStatement();
             con.res=con.stmt.executeQuery(sql);
             if(con.res.next()){
-                str1=con.res.getString(1);
-                str2=con.res.getString(2);
+                str1=con.res.getString(1);                                       //rollnumber
+                str2=con.res.getString(2);                                       //name 
                 rollnotextfield.setText(str1);
                 lblerror.setVisible(false);
                        
@@ -147,7 +147,7 @@ public class entry extends javax.swing.JFrame {
                 
             }
             
-        }
+            }   
         
         catch(Exception e){
            
@@ -159,7 +159,7 @@ public class entry extends javax.swing.JFrame {
     private void rollnobuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollnobuttonActionPerformed
        messentry messpage=new messentry();
        messpage.setVisible(true);
-       messpage.fix(str2);
+       messpage.fix(str1,str2);
     }//GEN-LAST:event_rollnobuttonActionPerformed
 
     private void rollnotextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollnotextfieldActionPerformed
