@@ -13,7 +13,7 @@ public class connection {
     
     public Connection conn;
     Statement stmt;
-    String dbURL=("jdbc:mysql://localhost:3306/messproject?zeroDateTimeBehavior=convertToNull");
+    String dbURL=("jdbc:mysql://192.168.1.106:3306/messbilling?zeroDateTimeBehavior=convertToNull");
     ResultSet res;
     public connection() {
         create();

@@ -16,13 +16,32 @@ public class messentry extends javax.swing.JFrame {
     
      private int x,y;
      private String time,currentDate;
-     public String str="0",str1="0",str3; 
+     public String str="0",str1="0",str3="",str4,str5; 
+     static int a,i;
+     
     /**
      * Creates new form messentry
+     * 
      */
+     public String calculaterandom(){
+		
+            Random ran=new Random();
+           // String[] alphabet={"a","b","c","d","e","f","g","h","i","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+                    
+                    for(i=1;i<=4;i++){
+                   // a=ran.nextInt(26);
+                   // str3=str3+alphabet[a];
+                    a=1+ran.nextInt(100);
+                    str3=str3+a;
+                    a=1+ran.nextInt(100);
+                    str3=str3+a;
+            
+          }
+           return(str3); 
+    }
     public void fix(String str1, String str2) {
         
-        str3=str1;
+        str4=str1;
         lblname.setText(str2);
         lbldate.setText(dateformat());
     }
@@ -201,20 +220,18 @@ public class messentry extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitbuttonActionPerformed
+        
+        
         x=Integer.parseInt(amounttextfield.getText());
         String messid="gmess";
-        
+        str3=calculaterandom();
+        str5="xys";
         try{
-            
-            System.out.println(str3);
             connection con = new connection();
-            String sql = "Insert into eat values('"+messid+"','"+str3+"','"+time+"','"+x+"','"+currentDate+"')";
+            String sql = "Insert into eat values('"+str3+"','"+str4+"','"+messid+"','"+currentDate+"','"+time+"','"+x+"','"+str5+"')";
             con.stmt=con.conn.createStatement();
             con.stmt.execute(sql);
             JOptionPane.showMessageDialog(null,"Thanks");
-            {
-                
-            }
         }
         catch(Exception ex){
            //ex.printStackTrace();

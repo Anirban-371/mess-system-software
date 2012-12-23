@@ -133,7 +133,7 @@ public class entry extends javax.swing.JFrame {
             lblerror.setVisible(true);
             connection con=new connection();
             String cardnumber= cardnotextfield.getText().trim();
-            String sql="select rollno,name from student where cardid ='"+ cardnumber +"'";
+            String sql="select roll,name from student where card_id ='"+ cardnumber +"'";
             con.stmt=con.conn.createStatement();
             con.res=con.stmt.executeQuery(sql);
             if(con.res.next()){
@@ -159,7 +159,8 @@ public class entry extends javax.swing.JFrame {
     private void rollnobuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollnobuttonActionPerformed
        messentry messpage=new messentry();
        messpage.setVisible(true);
-       messpage.fix(str1,str2);
+       //pass rollnumber and name to the messdetails Jframe
+       messpage.fix(str1,str2);                                                     
     }//GEN-LAST:event_rollnobuttonActionPerformed
 
     private void rollnotextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rollnotextfieldActionPerformed
