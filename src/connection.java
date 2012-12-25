@@ -7,8 +7,12 @@
  *
  * @author Anirban
  */
+
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import java.sql.*;
 
+           
 public class connection {
     
     public Connection conn;
@@ -20,16 +24,18 @@ public class connection {
     }
             
 
-    public void create(){
+    private void create(){
         try{
             
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conn=DriverManager.getConnection(dbURL,"root","anineo");
         }
-        catch(Exception e){
+        catch(ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException e){
             System.out.print(e);
         }
     }
+    
+    
         
 }
 
